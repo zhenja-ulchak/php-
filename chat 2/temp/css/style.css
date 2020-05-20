@@ -1,0 +1,58 @@
+body{
+    font-family:monospace;
+    font-size:110%;
+}
+input{
+    width:200px;
+    background-color:#FFCC99;
+    border: 1px dotted #FF9900;
+}
+.button{
+    border: 2px solid #FF9900;
+    cursor:pointer;
+    background-color:#FF9900;
+    color:#fff;
+    font-weight:bold;
+}
+.button:hover{
+    border: 2px solid #FFCC99;
+    cursor:pointer;
+    background-color:#FFCC99;
+    color:#fff;
+    font-weight:bold;
+}
+.login{
+  background-color:#FF9900;
+  color:#fff;
+}
+.login a{
+    text-decoration:none;
+    color:#fff;
+}
+#content{
+    width:80%;
+    margin-left:10%;
+    text-align:center;
+    border: 1px solid #FFCC99;
+}
+#content a{
+    margin-top:10px;
+    text-decoration:none;
+    color:#000;
+}
+.profile{
+    margin-left: 10%;
+    border: 2px solid #FFCC99;
+    padding: 10px;
+}
+.navigation table{
+    width:100%;
+    padding: 20px;
+}
+.navigation table tr td{
+   padding: 20px; 
+}
+.navigation table tr td:hover{
+    padding: 20px;
+    background:#FF9900;
+}
