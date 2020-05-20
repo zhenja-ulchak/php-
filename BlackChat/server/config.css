@@ -1,0 +1,118 @@
+BODY
+{
+ background : #000000 none;
+ margin : 10px 10px 10px 10px;
+ color: #000000;
+ cursor : default;
+}
+
+A.Txt:Link    {
+ color : #FFFF00;
+ text-decoration : none;
+}
+A.Txt:Visited {
+ color : #FFFF00;
+ text-decoration : none;
+}
+A.Txt:Hover   {
+ color : #FFFFFF;
+ text-decoration : underline;
+}
+
+A.Grc:Link    {
+ color : #C1C1C1;
+ text-decoration : none;
+}
+A.Grc:Visited {
+ color : #C1C1C1;
+ text-decoration : none;
+}
+A.Grc:Hover   {
+ color : #FFFFFF;
+ text-decoration : underline;
+}
+
+A.Grn:Link    {
+ color : #00FF00;
+ text-decoration : none;
+}
+A.Grn:Visited {
+ color : #00FF00;
+ text-decoration : none;
+}
+A.Grn:Hover   {
+ color : #FFFFFF;
+ text-decoration : underline;
+}
+
+A.Aqc:Link    {
+ color : #00FFFF;
+ text-decoration : none;
+}
+A.Aqc:Visited {
+ color : #00FFFF;
+ text-decoration : none;
+}
+A.Aqc:Hover   {
+ color : #FFFFFF;
+ text-decoration : underline;
+}
+
+.Txt
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #FFFFFF;
+ border-color : #FFFFFF;
+}
+
+.Red
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #FF0000;
+}
+
+.Grn
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #00FF00;
+}
+
+.Aqc
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #00FFFF;
+}
+
+.Grc
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #C1C1C1;
+}
+
+.Yel
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #FFFF00;
+}
+
+.Frm
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ border : 1px hidden;
+ background: #F5F5F5;
+ color : #000000;
+}
+
+.But
+{
+ cursor: pointer;
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ border : 1px solid #FFFFFF;
+ background: transparent;
+ color : #FFFFFF;
+}
+
+.Chk
+{
+ cursor: pointer; 
+}

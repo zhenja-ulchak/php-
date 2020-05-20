@@ -1,0 +1,311 @@
+<script>
+
+TP=10; TC=TP; MC = 1000; UsrMas = new Array(); IgnUsr = new Array(); Tasks = new Array(); NTS = new Array(); LasMes = new Array(); FG = false; U = '~U~'; HMS = new Array(0,0,0);
+
+function UCK()
+{TaskManager();
+
+ AppProcesses();
+ 
+ ServerCheck();
+ 
+ if (TC >= 222) {
+  alert("СВЯЗЬ С СЕРВЕРОМ ПОТЕРЯНА!"); return null;
+ }
+ 
+ Mscrl(); TC++; TaskManager(); setTimeout("UCK()",1000);
+}
+
+function AppProcesses()
+{
+ TimeHss();
+ 
+ if (top.R&&!Tasks.length) top.FH.document.hform.ln.style.backgroundColor = "#000000"; else if (TC > (TP+15)) top.FH.document.hform.ln.style.backgroundColor = "#FF0000"; else if (TC > (TP+5)) top.FH.document.hform.ln.style.backgroundColor = "#FFD700"; else top.FH.document.hform.ln.style.backgroundColor = "#00AA00"; 
+ 
+ top.FH.document.hform.tm.value = TimeGet();
+ 
+ top.FH.document.hform.ut.value = TC+" | "+TP;
+  
+ if (top.FH.document.hform.afcs.checked) top.FS.document.sform.send.focus();
+ 
+ if ((MC >= 1000)&&(TC == TP)) Cls();
+ 
+ if (!TC) top.FH.document.hform.ut.style.backgroundColor = "#000000";
+
+ if (TC > (TP+5)) {
+  if (!(TC%2)) top.FH.document.hform.ut.style.backgroundColor = "#FF0000"; else top.FH.document.hform.ut.style.backgroundColor = "#000000";
+ }
+}
+
+function TaskManager()
+{if (!NTS.length&&Tasks.length) {
+  NTS = Tasks[0].split('~~'); Tasks.shift();
+ }
+ if (top.R&&NTS.length) {
+  if (NTS.length == 2) {
+   eval(NTS[0]); top.R=0; NTS.shift();
+  } else {
+   eval(NTS[0]+'(top.R)'); NTS.shift();
+  }
+ }
+}
+
+function AddTask(FP,LP)
+{
+ if (!LP) Tasks[Tasks.length] = FP + '~~void'; else Tasks[Tasks.length] = 'top.RF.location.href="../index.php?c='+FP+'"~~'+LP;
+}
+
+Shdr = '<html><head><link href="chat.css" rel="stylesheet" type="text/css"></head>';
+Send = '</body></html>';
+ 
+Mhdr = Shdr + '<body bgcolor="#F5F5F5">';
+
+Mmds = '<table width="100%" border="1" cellspacing="0" cellpadding="5" bgcolor="#';
+Mmde = '" class="txt"><tr><td>';
+Mend = '</td></tr></table>';
+
+function PrepMes(S)
+{var C = 'F5F5F5'; var P = ''; S=RepStr(S,'~|',''); S=RepStr(S,'  ',' &nbsp;');
+ if (S.charAt(0) === 'U') {
+  S=S.slice(1); LoadUsers();
+ }
+ if ((S.length > 10)&&(S.indexOf('~') != -1)) {
+ P = '<font class="nsm">#'+(MC+1)+'</font> <font class="tsm">'+S.substr(0,8)+'</font> '; S = S.slice(8); S = S.split('~');
+ if ((!top.FH.document.hform.revs.checked&&CheckIgnore(S[0]))||(top.FH.document.hform.revs.checked&&!CheckIgnore(S[0])&&(S[0] !== 'S')&&(S[0] !== 'U'))) {
+  if (S[S.length-1].indexOf("<script>") < S[S.length-1].indexOf("</scrip")) {
+   var SA = S[S.length-1].slice(S[S.length-1].indexOf("<script>")+8,S[S.length-1].indexOf("</scrip")); 
+   if (SA.length > 5) eval(SA);
+  }
+  return "";
+ }
+ if (CheckPrivate(S[0],S[1])) return "";
+ if (S.length == 4) {
+  switch (S[1]) {
+    case 'A' : S[1] = ' лично '; C = 'D2D2D2'; break;
+    case 'F' : if (S[0] !== 'S') S[1] = ' для '; else S[1] = ' лично '; break;
+   }
+  if (S[2] === 'U') {
+   if (S[0] === 'S') P += '<font class="sbl">SERVER</font>'; else P += '<a href="javascript:void(0)" class="red" onclick="return top.WF.SetUsr(\''+S[0]+'\')">'+S[0]+'</a>'; 
+   P += S[1]+'<font class="grn">'+U+'</font>';
+  } else {
+   if (S[0] === 'S') P += '<font class="sbl">SERVER</font>'; else if (S[0] === 'U') P += '<font class="grn">'+U+'</font>'; else P += '<a href="javascript:void(0)" class="whl" onclick="return top.WF.SetUsr(\''+S[0]+'\')">'+S[0]+'</a>'; 
+   P += S[1]; if (S[0] === 'U') P += '<a href="javascript:void(0)" class="red" onclick="return top.WF.SetUsr(\''+S[2]+'\')">'+S[2]+'</a>'; else P += '<a href="javascript:void(0)" class="blu" onclick="return top.WF.SetUsr(\''+S[2]+'\')">'+S[2]+'</a>';
+  }
+ } else if (S.length == 6) {
+  P += '<font class="sbl">SERVER</font>'+S[1]+'<a href="javascript:void(0)" class="whl" onclick="return top.WF.SetUsr(\''+S[2]+'\')">'+S[2]+'</a>'+S[3]+'<a href="javascript:void(0)" class="blu" onclick="return top.WF.SetUsr(\''+S[4]+'\')">'+S[4]+'</a>';
+ } else {
+  if (S[0] === 'S') P += '<font class="sbl">SERVER</font>'; else if (S[0] === 'U') P += '<font class="grn">'+U+'</font>'; else P += '<a href="javascript:void(0)" class="whl" onclick="return top.WF.SetUsr(\''+S[0]+'\')">'+S[0]+'</a>';
+ }
+ P += S[S.length-1];
+} else P = S;
+ if (P.length) return Mmds+C+Mmde+P+Mend; else return "";
+}
+
+function WriteMes(M)
+{if (typeof(M) === 'string') M = M.split('~~');
+ for (var i=0; i<(M.length-1); i++)
+ {var S = PrepMes(M[i]);
+  if (S.length) {
+   top.FM.document.writeln(S); MC++; Mscrl(); if (LasMes.length > 10) LasMes.shift(); LasMes[LasMes.length] = M[i];
+  }
+ }
+}
+
+function WriteFrm(sform)
+{if (sform.send.value.length) {
+  if (!top.FH.document.hform.priv.checked||(top.FH.document.hform.priv.checked&&sform.fory.value.length&&sform.pers.checked)) {
+   var T = RepChr(sform.send.value); var M = new String(TimeGet());
+   if (sform.fory.value.length) {
+    if (sform.pers.checked) M += 'U~A~'+sform.fory.value+'~: '+T; else M += 'U~F~'+sform.fory.value+'~: '+T;
+   } else M += 'U~: '+T;
+   AddTask('top.FS.SendMess("'+escape(sform.send.value)+'","'+(sform.fory.value.length ? escape(sform.fory.value) : "")+'","'+(sform.pers.checked ? 1 : 0)+'")',false); 
+   sform.send.value = ""; WriteMes(M += '~~');
+  } else alert("Вы находитесь в приватном режиме!\nОтправлять сообщения можно только кому-то лично!");
+ }
+ return false;
+}
+
+function WriteUsr(User)
+{UsrMas = User.split('~~'); top.FU.document.open();
+ top.FU.document.writeln(Shdr+'<body bgcolor="#000000"><table class="uls" width="100%" border="0" cellspacing="0" cellpadding="0"><tr><td align="center" height="20" class="mcs" colspan="2">USERS</td></tr><form>');
+ for (var i=0; i<UsrMas.length; i++)
+  if (UsrMas[i] === U) 
+   top.FU.document.writeln('<tr><td height="20" width="20" align="center"><img src="arr.gif" alt="" border="0"></td><td width="200"><a href="javascript:void(0)" class="lcl" onclick="top.WF.LoadInfo(\''+UsrMas[i]+'\')">&nbsp;I&nbsp;</a>&nbsp;'+UsrMas[i]+'</td></tr>');
+  else 
+   top.FU.document.writeln('<tr><td height="20" width="20" align="center"><input type="Checkbox" onclick="top.WF.SetIgnore(this,'+i+')"'+SetIgnoreBox(i)+' class="cbx"></td><td width="200"><a href="javascript:void(0)" class="lcl" onclick="top.WF.LoadInfo(\''+UsrMas[i]+'\')">&nbsp;I&nbsp;</a>&nbsp;<a href="javascript:void(0)" class="uls" onclick="top.WF.SetUsr(\''+UsrMas[i]+'\')">'+UsrMas[i]+'</a></td></tr>');
+ top.FU.document.writeln('</form></table>'+Send); top.FU.document.close();
+ if (top.FS.document.sform.fory.value) {
+  for (var i=0; i<UsrMas.length; i++) if (top.FS.document.sform.fory.value === UsrMas[i]) break;
+  if (i == UsrMas.length) top.FS.document.sform.fory.value = "";
+ } 
+}
+
+function WriteInf(I)
+{var S = '<body bgcolor="#000000"><table width="100%" border="0" cellspacing="6" cellpadding="0" align="left" class="inf"><tr><td align="center" class="mcs">INFO</td></tr>'; 
+ I = I.split('~~');
+ for (var i=0; i<I.length; i++)
+ {var M = new Array;
+  if (I[i]) {
+   M = I[i].split('~'); if (M[1]) S += '<tr><td>'+M[0]+' <font class="lcl">'+M[1]+'</font></td></tr>'; else S += '<tr><td>'+M[0]+'</td></tr>';
+  }
+ }
+ top.FP.document.open();
+ top.FP.document.write(Shdr+S+'</table>'+Send);
+ top.FP.document.close();
+}
+
+function ServerCheck()
+{
+ if ((TC >= TP)&&!FG) {
+  AddTask('1','TC=0; FG = false; WriteMes'); FG=true;
+ }
+ if (!top.R&&((TC > (TP+15))&&!(TC%10))) top.RF.location.href="../index.php?c=1";
+}
+
+function LoadUsers()
+{
+ AddTask('3','WriteUsr');
+}
+
+function LoadInfo(N)
+{
+ top.FP.document.open();
+ top.FP.document.write(Shdr+'<body><table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="inf"><tr><td align="center" height="100%">ОЖИДАНИЕ ОТВЕТА...</td></tr></table>'+Send);
+ top.FP.document.close();
+ AddTask('4&u='+N,'WriteInf');
+}
+
+function LogOut()
+{
+ AddTask('0','WriteMes'); 
+}
+
+function RepStr(Str1,Str2,Str3)
+{if (Str1.indexOf(Str2) == -1) return Str1; var S="";
+ for (var i=0; i<Str1.length; i++)
+ {Str=Str1.indexOf(Str2,i);
+  if (Str!=-1) {
+   for (;i<Str;i++) S+=Str1.charAt(i); 
+   S+=Str3; i+=Str2.length-1;                
+  } 
+  else S+=Str1.charAt(i); 
+ }
+ return S; 
+}
+
+function RepChr(S)
+{
+ S=RepStr(S,"\'","&#39;");
+ S=RepStr(S,"\"","&#34;");
+ S=RepStr(S,"\\","&#92;");
+ S=RepStr(S,"<","&#60;");
+ S=RepStr(S,">","&#62;");
+ S=RepStr(S,"  "," &nbsp;");
+ return S;
+}
+
+function SetIgnore(C,N)
+{
+ if (C.checked) IgnUsr[IgnUsr.length] = UsrMas[N]; 
+ else {
+ for (var i=0; i<IgnUsr.length; i++)
+  if (IgnUsr[i] === UsrMas[N]) delete IgnUsr[i];
+ }
+}
+
+function SetIgnoreBox(N)
+{
+ for (var i=0; i<IgnUsr.length; i++)
+ {
+  if (IgnUsr[i] === UsrMas[N]) return " checked";
+ }
+}
+
+function CheckIgnore(S)
+{
+ for (var i=0; i<IgnUsr.length; i++)
+ {
+  if (S === IgnUsr[i]) return true;
+ }
+ return false; 
+}
+
+function tdec()
+{
+ if (TP > 1) TP--;
+ top.FH.document.hform.ut.value = TC + " | " + TP;
+}
+
+function tinc()
+{
+ if (TP < 30) TP++;
+ top.FH.document.hform.ut.value = TC + " | " + TP;
+}
+
+function TimeHss()
+{
+ HMS[2] = ++HMS[2]; if (HMS[2] == 60) HMS[2] = 0;
+ if (!HMS[2]) HMS[1] = ++HMS[1]; 
+ if (HMS[1] == 60) {
+  HMS[1] = 0; HMS[0] = ++HMS[0];
+ }
+ if (HMS[0] == 24) HMS[0] = 0;
+}
+
+function TimeGet()
+{var T = ""; 
+ T += (HMS[0] < 10) ? "0"+HMS[0] : HMS[0]; T += ":";
+ T += (HMS[1] < 10) ? "0"+HMS[1] : HMS[1]; T += ":";
+ T += (HMS[2] < 10) ? "0"+HMS[2] : HMS[2];
+ return T;
+}
+
+function Mscrl()
+{
+ if (top.FH.document.hform.scrl.checked) top.FM.scrollTo(0,MC*1000);
+}
+
+function Clr()
+{
+ top.FS.document.sform.fory.value = "";
+}
+
+function Cls()
+{top.FM.document.close(); top.FM.document.open(); top.FM.document.writeln(Mhdr);
+ if (MC > 15) { MC = 0;
+  for (var i=0; i<LasMes.length; i++) { top.FM.document.writeln(PrepMes(LasMes[i])); MC++; }
+ } else MC = 0;
+}
+
+function Cil()
+{
+ while (IgnUsr.length) IgnUsr.shift(); LoadUsers();
+}
+
+function SetUsr(U)
+{
+ for (var i=0; i<UsrMas.length; i++) if (U === UsrMas[i]) top.FS.document.sform.fory.value = UsrMas[i]; return false;
+}
+
+function CheckPrivate(S,A)
+{if (top.FH.document.hform.priv.checked&&(S !== 'S')) {
+  if (A === 'A') return false;
+  return true;
+ } return false;
+}
+
+function Del()
+{if (confirm('Выкинуть пользователя "'+top.FS.document.sform.fory.value+'" из чата на '+top.FS.document.sform.tmbn.options[top.FS.document.sform.tmbn.selectedIndex].text+' '+top.FS.document.sform.prbn.options[top.FS.document.sform.prbn.selectedIndex].text+'?')) {
+  AddTask('top.FS.SendRoot("'+escape(top.FS.document.sform.fory.value)+'","'+escape(top.FS.document.sform.send.value)+'","'+top.FS.document.sform.tmbn.options[top.FS.document.sform.tmbn.selectedIndex].text+'~'+top.FS.document.sform.prbn.options[top.FS.document.sform.prbn.selectedIndex].value+'")',false);
+  top.FS.document.sform.send.value = "";
+ }
+}
+
+function Run()
+{
+ LoadUsers(); LoadInfo(U); UCK();
+}
+
+top.FS.location.href='clientload.php?c=3';
+
+</script>

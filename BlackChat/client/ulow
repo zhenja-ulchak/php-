@@ -1,0 +1,16 @@
+<html><head><link href="chat.css" rel="stylesheet" type="text/css"></head>
+<body onLoad="top.WF.Run()"><table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0" class="mcs">
+<tr valign="middle"><form name="sform" onsubmit="return top.WF.WriteFrm(this)">
+<td>&nbsp;&nbsp;</td><td width="100%"><input type="text" name="send" maxlength="1024" style="width: 100%"></td>
+<td>&nbsp;</td><td><input type="submit" value="OK" class="btn"></td>
+<td>&nbsp;</td><td><input type="text" name="fory" size="20" readonly class="but" onClick="top.WF.Clr()"></td>
+<td>&nbsp;</td><td><input type="checkbox" name="pers" title="Лично" class="cbx"></td>
+<td>&nbsp;</td><td><input type="button" value="CLR" class="btn" onclick="top.WF.Clr()"></td></form><form action="../index.php?c=2" method="post" target="RF"><input type="hidden" name="m"><input type="hidden" name="f"><input type="hidden" name="p"></form></tr></table>
+<script>
+function SendMess(M,F,P)
+{var SM = top.FS.document.forms[1];
+ SM.m.value = unescape(M); SM.f.value = unescape(F); SM.p.value = P; SM.submit();
+ delete SM;
+}
+</script>
+</body></html>

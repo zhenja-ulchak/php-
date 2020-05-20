@@ -1,0 +1,136 @@
+A.Red:Link    { color: #FF0000; }
+A.Red:Visited { color: #FF0000; }
+A.Red:Hover   { color: #000000; text-decoration : underline; }
+
+A.Blu:Link    {	color: #0000FF; }
+A.Blu:Visited { color: #0000FF; }
+A.Blu:Hover   { color: #000000; text-decoration : underline; }
+
+A.Whl:Link    { color: #FF8C00; }
+A.Whl:Visited { color: #FF8C00; }
+A.Whl:Hover   { color: #000000; text-decoration : underline; }
+
+A.Lcl:Link    {	color: #00FF00; }
+A.Lcl:Visited { color: #00FF00; }
+A.Lcl:Hover   {	color: #00FF00;	text-decoration : underline; }
+
+A.Uls:Link    {	color: #FFD700; }
+A.Uls:Visited { color: #FFD700; }
+A.Uls:Hover   {	color: #FFD700;	text-decoration : underline; }
+
+.Txt
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color: Navy;
+	text-decoration : none;
+}
+
+.Red
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #FF0000;
+	text-decoration : none;
+}
+
+.Grn
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #009900;
+	text-decoration : none;
+}
+
+.Blu
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #0000FF;
+	text-decoration : none;
+}
+
+.Whl
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #FF8C00;
+	text-decoration : none;
+}
+
+.Sbl
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #000000;
+	text-decoration : none;
+}
+
+.Nsm
+{
+	font : bold 7pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #5F9EA0;
+}
+
+.Tsm
+{
+	font : 7pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	color : #000000;
+}
+
+.Mcs
+{
+	font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	border : none;
+	background: #000000;
+	color : #FFFFFF;
+}
+
+.But
+{
+	font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	border : 1px solid #FFFFFF;
+	background: transparent;
+	color : #FFFFFF;
+	text-align : center;
+	cursor : default;
+}
+
+.Btn
+{
+	font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	border : 1px solid #FFFFFF;
+	background: transparent;
+	color : #FFFFFF;
+	text-align : center;
+	cursor : pointer;
+}
+
+.Sel
+{
+	font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	border : none;
+	background: #000000;
+	color : #FFFFFF;
+}
+
+.Inf
+{
+	font : bold 8pt Arial, Helvetica, sans-serif;
+	background: #000000;
+	color : #FFFFFF;
+}
+
+.Lcl
+{
+	font : bold 8pt Arial, Helvetica, sans-serif;
+	color : #FFFF00;
+	text-decoration : none;
+}
+
+.Uls
+{
+	font : bold 8pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+	background: #000000;
+	color : #FFFFFF;
+	text-decoration : none;
+}
+
+.Cbx
+{
+	cursor : pointer;
+}

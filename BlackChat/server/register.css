@@ -1,0 +1,56 @@
+BODY
+{
+ background : #000000 none;
+ margin : 10px 10px 10px 10px;
+ color: #000000;
+ cursor : default;
+}
+
+A.Txt:Link    {	color : #00FFFF; }
+A.Txt:Visited {	color : #00FFFF; }
+A.Txt:Hover   {	color : #00FFFF; text-decoration : underline; }
+
+.Txt
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #FFFFFF;
+ text-decoration : none;
+}
+
+.Grn
+{
+ font : bold 10pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #00FF00;
+}
+
+.Erc
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ color : #FF0000;
+}
+
+.Frm
+{
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ border : 1px hidden;
+ background: #F5F5F5;
+ color : #000000;
+}
+
+.But
+{
+ cursor: pointer;
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ border : 1px solid #FFFFFF;
+ background: transparent;
+ color : #FFFFFF;
+}
+
+.Chk
+{
+ cursor: pointer;	
+ font : bold 9pt Verdana, Geneva, Arial, Helvetica, sans-serif;
+ border : 1px hidden;
+ background: transparent;
+ color : #000000;
+}
